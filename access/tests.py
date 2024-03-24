@@ -218,7 +218,7 @@ class DistanceEducationSystemTests(APITestCase):
         self.assertEqual(response.data["done"], False)
         self.assertEqual(response.data["result"], None)
 
-    def test_get_log_file_status_success(self):  # TODO: implement
+    def test_get_log_file_status_success(self):
         desired_response_data = {
             "id": None,
             "done": True,

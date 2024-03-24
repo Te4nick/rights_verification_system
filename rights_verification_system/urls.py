@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from access.views import AccessViewSet
 
@@ -41,4 +43,23 @@ urlpatterns = [
         ),
         name="forbidden_ops",
     ),
-]
+    path(
+        "log/",
+        AccessViewSet.as_view(
+            {
+                "get": "get_log_file",
+            }
+        ),
+        name="get_log_file",
+    ),
+    path(
+        "log/status/",
+        AccessViewSet.as_view(
+            {
+                "get": "get_log_file_status",
+            }
+        ),
+        name="get_log_file_status",
+    ),
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,11 +1,6 @@
 from django.db import models
 import enum
-
-
-class AccessType(enum.Enum):
-    read = "read"
-    write = "write"
-    execute = "execute"
+from uuid import UUID
 
 
 class AccessRights:
@@ -37,3 +32,29 @@ class AccessLogEntry:
 
     def __repr__(self) -> str:
         return f"{self.user};{self.resource};{self.status}"
+
+
+class Operation:
+    id: UUID
+    done: bool
+
+    def __init__(self, id: UUID, done: bool = False, result=None) -> None:
+        self.id = id
+        self.done = done
+        self.result = result
+
+    def __eq__(self, other: "Operation") -> bool:
+        return (
+            self.id == other.id
+            and self.done == other.done
+            and self.result == other.result
+        )
+
+    # def __repr__(self) -> str:
+    #     return str(
+    #         {
+    #             "id": self.id,
+    #             "done": self.done,
+    #             "result": self.result,
+    #         }
+    #     )

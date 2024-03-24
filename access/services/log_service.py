@@ -19,3 +19,6 @@ class LogService:
     def write_entry(self, user: str, resource: str, status: AccessLogStatus) -> None:
         with open(self.log_file, "a") as log_file:
             log_file.write(str(AccessLogEntry(user=user, resource=resource, status=status.value)) + "\n")
+
+    def get_log_file_path(self) -> str:
+        return self.log_file

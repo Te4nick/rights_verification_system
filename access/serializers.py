@@ -30,3 +30,13 @@ class ValidationErrorSerializer(serializers.Serializer):
             child=serializers.CharField()
         )
     )
+
+
+class OperationSerializer(serializers.Serializer):
+    id = serializers.CharField(required=True, min_length=36, max_length=36)
+    done = serializers.BooleanField()
+    result = serializers.DictField()
+
+
+class GetOperationQuerySerializer(serializers.Serializer):
+    id = serializers.UUIDField(required=True)

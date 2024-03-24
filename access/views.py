@@ -85,6 +85,7 @@ class AccessViewSet(ViewSet):
         self.access_service.add_entry(**in_access.data)
         return Response(
             status=status.HTTP_201_CREATED,
+            data=ModifyAccessSerializer(in_access.data).data
         )
 
     @action(detail=False, methods=["GET"])

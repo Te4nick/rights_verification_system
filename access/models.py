@@ -9,6 +9,13 @@ class AccessRights:
         self.write = is_write
         self.execute = is_exec
 
+    def __eq__(self, other: "AccessRights"):
+        return (
+            self.read == other.read
+            and self.write == other.write
+            and self.execute == other.execute
+        )
+
     def modify(self, is_read: bool = False, is_write: bool = False, is_exec: bool = False):
         self.read = is_read
         self.write = is_write
@@ -49,12 +56,3 @@ class Operation:
             and self.done == other.done
             and self.result == other.result
         )
-
-    # def __repr__(self) -> str:
-    #     return str(
-    #         {
-    #             "id": self.id,
-    #             "done": self.done,
-    #             "result": self.result,
-    #         }
-    #     )
